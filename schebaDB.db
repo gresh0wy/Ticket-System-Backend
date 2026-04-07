@@ -1,0 +1,62 @@
+CREATE TABLE tickets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    -- Dane zgłaszającego
+    imie_nazwisko VARCHAR(100) NOT NULL,
+    numer_wewnetrzny VARCHAR(20) NOT NULL,
+
+    -- Miejsce zdarzenia
+    miejsce_zdarzenia VARCHAR(100) NOT NULL,
+        
+
+    -- Dział docelowy
+    dzial_docelowy ENUM('it', 'medical_equipment', 'electrical', 'construction', 'cybersecurity'
+    ) NOT NULL,
+        
+
+    -- Kategoria zgłoszenia
+    kategoria_zgloszenia VARCHAR(100) NOT NULL,
+        
+
+    -- Treść zgłoszenia
+    temat_zgloszenia VARCHAR(255) NOT NULL,
+    opis_zgloszenia TEXT NOT NULL,
+
+    -- Priorytet i powtarzalność
+    priorytet_zgloszenia ENUM('low', 'medium', 'high') NOT NULL DEFAULT 'low',
+    powtarzalnosc ENUM('once', 'rare', 'frequent') NOT NULL DEFAULT 'once',
+
+    -- Status zgłoszenia
+    status_zgloszenia ENUM('new', 'in_progress', 'closed', 'canceled') 
+        NOT NULL DEFAULT 'new',
+
+    -- Pola systemowe
+   data_utworzenia TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   data_modyfikacji TIMESTAMP NULL,
+
+
+    -- Opcjonalne rozszerzenia
+    utworzone_przez VARCHAR(100),
+    przypisane_do VARCHAR(100) NULL,
+
+    -- Indeksy
+    INDEX idx_status (status_zgloszenia),
+    INDEX idx_dzial (dzial_docelowy),
+    INDEX idx_data (data_utworzenia),
+    INDEX idx_miejsce (miejsce_zdarzenia),
+    INDEX idx_kategoria (kategoria_zgloszenia),
+    INDEX idx_priorytet (priorytet_zgloszenia)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE users (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    imie VARCHAR(60) NOT NULL,
+    nazwisko VARCHAR(80) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    is_admin TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
