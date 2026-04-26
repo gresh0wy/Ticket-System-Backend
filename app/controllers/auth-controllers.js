@@ -18,7 +18,7 @@ class authController {
                 [username])
 
             if (row.length === 0) {
-                return res.status(401).json({ message: 'Nieprawidłowe dane logowania' })
+                return res.status(401).json({ error: 'Nieprawidłowe dane logowania' })
             }
 
             const user = row[0] //przypisujemy do usera obiekt użytkownika
@@ -33,7 +33,7 @@ class authController {
             });
 
             if (isMatch) {
-                return res.status(200).json({ message: 'pomyślnie zalogowano', token: token })
+                return res.status(200).json({ message: 'pomyślnie zalogowano' })
             } else {
                 return res.status(401).json({ error: 'nieprawidłowe dane logowania' })
             }
@@ -60,17 +60,17 @@ class authController {
         // weryfikacja poprawności email
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
         if (!emailRegex.test(email)) {
-            return res.status(400).json({ message: 'Nieprawidłowy email' })
+            return res.status(400).json({ error: 'Nieprawidłowy email' })
         }
 
 
         // walidacja  długośści znaków
         if (newUsername.length < 3) {
-            return res.status(400).json({ message: 'Minimalna liczba znaków dla username to 3' })
+            return res.status(400).json({ error: 'Minimalna liczba znaków dla username to 3' })
         }
 
         if (password.length < 8) {
-            return res.status(400).json({ message: 'Minimalna liczba znaków dla hasła to 8' })
+            return res.status(400).json({ error: 'Minimalna liczba znaków dla hasła to 8' })
         }
 
 
@@ -101,7 +101,7 @@ class authController {
             })
             return res.status(200).json({ message: 'wylogowano pomyślnie' })
         } catch (error) {
-            res.status(500).json({ message: 'błąd serwera' })
+            res.status(500).json({ error: 'błąd serwera' })
         }
     }
 
@@ -261,7 +261,7 @@ class authController {
         try {
             res.status(200).json(findMe)
         } catch (error) {
-            res.status(500).json({ message: `błąd serwera: ${error}` })
+            res.status(500).json({ error: `błąd serwera: ${error}` })
         }
     }
 }

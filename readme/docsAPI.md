@@ -205,14 +205,22 @@ Tworzy nowe zgłoszenie.
 **Body:**
 ```json
 {
-  "title": "string",
-  "description": "string"
+  "imie_nazwisko":"string",
+  "numer_wewnetrzny":"number",
+  "miejsce_zdarzenia":"number",
+  "dzial_docelowy":"string",
+  "kategoria_zgloszenia":"string",
+  "temat_zgloszenia":"string",
+  "opis_zgloszenia":"string",
+  "priorytet_zgloszenia":"string",
+  "powtarzalnosc":"string"
 }
 ```
 
 **Odpowiedzi:**
 | Status | Opis |
 |--------|------|
+| 400 | Brakuje wymaganych pól |
 | 201 | Zgłoszenie utworzone |
 | 500 | Błąd serwera |
 
@@ -272,9 +280,12 @@ Edytuje zgłoszenie.
 **Body:**
 ```json
 {
-  "title": "string",
-  "description": "string",
-  "status": "string"
+  "dzial_docelowy":"string",
+  "kategoria_zgloszenia":"string",
+  "priorytet_zgloszenia":"string",
+  "status_zgloszenia":"string",
+  "przypisane_do":"string",
+  "komentarz":"string"
 }
 ```
 

@@ -61,3 +61,9 @@ Kombinacja `isAdmin` grupuje oba i stosowana jest na trasach administracyjnych.
 - Token JWT przechowuje dodadkowo dwa parametry: imie oraz nazwisko.
 - Rozpoczącie prac nad stworzeniem dokumentacji do API.
 - Przygowotanie wstępnego środowiska dla frontendu (React + TS).
+- Implementacja cors w celu komunikacji api z frontendem (bulid devs):
+    - BACKEND origin: 'http://localhost:5173', // zezwala na komunikacje z frontendem tylko z wybraneym adresem
+              credentials: true // zezwala na res/req i cisateczka 
+    - FRONTEDN  credentials: 'include' // zezwala na zapisywanie ciasteczek 
+- Pierwotnie wyświetlanie zgłószenia było w tablicy teraz jest w obiekcie
+- Dodanie dynamicznego edycji zgłoszenia
